@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
 import styles from './Login.module.css'
 import { useNavigate } from "react-router-dom";
-const Login = ()=>{
+
+const Login = (props)=>{
 
     const inputLoginEmailRef = useRef();
     const inputLoginPassRef = useRef();
+    
+
     let navigate = useNavigate();
     const loginSubmitHandler = (event) =>{
         event.preventDefault();
@@ -33,6 +36,7 @@ const Login = ()=>{
             }
         }).then((data)=>{
             localStorage.setItem('TokenIDExpense', data.idToken)
+            props.setLogin(true)
             navigate('/welcome')
         }).catch((err)=>{
             console.log("Something Went Wrong")

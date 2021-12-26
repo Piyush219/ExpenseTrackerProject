@@ -10,6 +10,7 @@ function App() {
 
   const [displayName, setDisplayName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('')
+  const [islogin, setIslogin] = useState(false)
 
   useEffect(()=>{
     fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA5nYjPCDidltvXYlAkGXzCUR0CIOQBAOo",{
@@ -39,12 +40,12 @@ function App() {
 
   return (
     <div>
-      <Header/>
+      <Header login = {islogin} setLogin = {setIslogin} />
     
     <Routes>
       <Route exact path = "/" element = {<SignUp />}/>
       <Route exact path = "/welcome" element = {<WelcomePage/>}/>
-      <Route exact path = "/login" element={<Login/>}/>
+      <Route exact path = "/login" element={<Login setLogin = {setIslogin}/> }/>
       <Route exact path = "/completeprofile" element={<ProfilePage inputName ={displayName} inputUrl = {photoUrl}/>}/>
     </Routes>
 
