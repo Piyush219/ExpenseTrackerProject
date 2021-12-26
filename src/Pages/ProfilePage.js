@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-const ProfilePage = () =>{
+const ProfilePage = (props) =>{
     const updateProfileNameRef = useRef();
     const updateProfilePhotoRef = useRef();
 
@@ -38,11 +38,12 @@ const ProfilePage = () =>{
 
     return (
         <div>
+            <h1>Contact Details</h1>
             <form onSubmit={updateProfileSubmitHandler}>
             <label htmlFor="profileName">Full Name: </label>
-            <input id="profileName" type="text" required ref={updateProfileNameRef}></input>
+            <input id="profileName" type="text" required ref={updateProfileNameRef} placeholder={props.inputName}></input>
             <label htmlFor="profileURL">Profile Photo Url: </label>
-            <input id="profileURL" type="text" required ref={updateProfilePhotoRef}></input>
+            <input id="profileURL" type="text" required ref={updateProfilePhotoRef} placeholder={props.inputUrl}></input>
             <button type="submit">Update</button>
             </form>
             
