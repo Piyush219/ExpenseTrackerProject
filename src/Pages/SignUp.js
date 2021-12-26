@@ -47,6 +47,7 @@ const SignUp = ()=>{
             }
         }).then((data) => {
             let id = data.idToken;
+            console.log(data)
             fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyA5nYjPCDidltvXYlAkGXzCUR0CIOQBAOo",{
                 method:'POST',
                 body:JSON.stringify({
@@ -88,7 +89,7 @@ const SignUp = ()=>{
                 <button type="submit" className={styles.signupBtn}>SignUp</button>
             </form>
             <div className={styles.verifyOtp}>
-            {isVerify && <VerifyEmail/>}
+            {isVerify && <VerifyEmail verify = {setIsVerify}/>}
             </div>
             
         </div>

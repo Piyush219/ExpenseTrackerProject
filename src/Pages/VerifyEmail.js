@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-const VerifyEmail = () =>{
+const VerifyEmail = (props) =>{
     
     const inputOtpRef = useRef();
 
@@ -22,7 +22,7 @@ const VerifyEmail = () =>{
 
                 console.log('Successfully Verified')
                 alert('Successfully Verified')
-                
+                props.verify(false)
                 return res.json();
             }
             else{
