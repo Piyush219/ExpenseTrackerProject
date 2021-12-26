@@ -1,7 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from'./SignUp.module.css'
+import VerifyEmail from "./VerifyEmail";
 
 const SignUp = ()=>{
+
+    const [isVerify, setIsVerify] = useState(false);
 
     const inputEmailRef = useRef();
     const inputPassRef = useRef();
@@ -33,6 +36,8 @@ const SignUp = ()=>{
 
                 console.log('Successfully Registered')
                 alert('Successfully Registered')
+                setIsVerify(true)
+                return res.json();
             }
             else{
                 return res.json().then(data => {
@@ -40,7 +45,32 @@ const SignUp = ()=>{
                     alert(data.error.message)
                 })
             }
+        }).then((data) => {
+            let id = data.idToken;
+            fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyA5nYjPCDidltvXYlAkGXzCUR0CIOQBAOo",{
+                method:'POST',
+                body:JSON.stringify({
+                    requestType: "VERIFY_EMAIL",
+                    idToken: id,
+                  }),
+                  headers:{
+                    'Content-Type': 'application/json'
+                  }
+
+            }).then(res =>{
+                if(res.ok){
+                    console.log("OTP SENT")
+                }
+                else{
+                    return res.json().then(data =>{
+                        alert("Something went wrong")
+                    })
+                }
+            })
         })
+        
+
+
 
     }
 
@@ -57,6 +87,10 @@ const SignUp = ()=>{
                 <input id="signupConfirmPass" type="password" required ref = {inputConfirmPassRef}></input>
                 <button type="submit" className={styles.signupBtn}>SignUp</button>
             </form>
+            <div className={styles.verifyOtp}>
+            {isVerify && <VerifyEmail/>}
+            </div>
+            
         </div>
     )
 
