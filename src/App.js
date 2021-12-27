@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SignUp from "./Components/Pages/SignUp";
 import {Routes, Route} from 'react-router-dom'
-import WelcomePage from "./Components/Pages/WelcomePage";
+import WelcomePage from "./Components/Layout/WelcomePage";
 import Login from "./Components/Pages/Login";
 import Header from "./Components/Layout/Header";
 import ProfilePage from "./Components/Pages/ProfilePage";
