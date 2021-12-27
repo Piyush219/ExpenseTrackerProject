@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styles from './Login.module.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = (props)=>{
 
@@ -52,6 +52,7 @@ const Login = (props)=>{
                 <input id="loginPass" type="password" required ref= {inputLoginPassRef}></input>
                 <button className={styles.loginBtn} type="submit">Login</button>
             </form>
+            <Link to = "/resetpassword">Forget Password?</Link>
         </div>
     )
 }

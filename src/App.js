@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import SignUp from "./Pages/SignUp";
+import SignUp from "./Components/Pages/SignUp";
 import {Routes, Route} from 'react-router-dom'
-import WelcomePage from "./Pages/WelcomePage";
-import Login from "./Pages/Login";
-import Header from "./Layout/Header";
-import ProfilePage from "./Pages/ProfilePage";
+import WelcomePage from "./Components/Pages/WelcomePage";
+import Login from "./Components/Pages/Login";
+import Header from "./Components/Layout/Header";
+import ProfilePage from "./Components/Pages/ProfilePage";
+import PasswordReset from "./Components/Pages/PasswordReset";
+import CreatingPassword from "./Components/Pages/CreatingPassword";
+import EnterResetCode from "./Components/Pages/EnterResetCode";
 
 function App() {
 
@@ -12,8 +15,11 @@ function App() {
   const [photoUrl, setPhotoUrl] = useState('')
   const [islogin, setIslogin] = useState(false)
 
+
   useEffect(()=>{
-    fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA5nYjPCDidltvXYlAkGXzCUR0CIOQBAOo",{
+    if(localStorage.getItem("TokenIDExpense")){
+      setIslogin(true)
+      fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA5nYjPCDidltvXYlAkGXzCUR0CIOQBAOo",{
       method: 'POST',
       body: JSON.stringify({
         idToken: localStorage.getItem("TokenIDExpense")
@@ -36,6 +42,8 @@ function App() {
     }).catch((err)=>{
       alert(err)
     })
+    }
+    
   },[])
 
   return (
@@ -47,7 +55,9 @@ function App() {
       <Route exact path = "/welcome" element = {<WelcomePage/>}/>
       <Route exact path = "/login" element={<Login setLogin = {setIslogin}/> }/>
       <Route exact path = "/completeprofile" element={<ProfilePage inputName ={displayName} inputUrl = {photoUrl}/>}/>
-    </Routes>
+      <Route exact path = "/resetpassword" element = {<PasswordReset/>}/>
+      <Route exact path = "/enterresetcode" element = {<EnterResetCode/>}/>
+      <Route exact path = '/createpassword' element = {<CreatingPassword/>}/>    </Routes>
 
     </div>
   );
