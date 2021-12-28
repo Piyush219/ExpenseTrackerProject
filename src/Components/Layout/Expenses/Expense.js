@@ -6,16 +6,17 @@ const Expenses = () => {
 
     
 
-  const dummyExpense = [
-    {
-      id: 'e1',
-      money: '100',
-      description: 'For health and school',
-      category: 'salary',
-    },
-  ];
+  // const dummyExpense = [
+  //   {
+  //     tempkey: 'tempkey1',
+  //     id: 'e1',
+  //     money: '100',
+  //     description: 'For health and school',
+  //     category: 'salary',
+  //   },
+  // ];
 
-  const [expense, setExpense] = useState(dummyExpense)
+  const [expense, setExpense] = useState([])
 
   const inputExpenseMoneyRef = useRef();
   const inputExpenseDescriptionRef = useRef();
@@ -28,21 +29,28 @@ useEffect(()=>{
     
     const dataArray = [];
     for(const key in response.data){
+      console.log("sfjbh",key)
       dataArray.push({
+       tempkey:key,
         id: response.data[key].id,
         money: response.data[key].money,
         description: response.data[key].description,
         category: response.data[key].category,
+        
       })
       
+      
     }
+    console.log("key", Object.keys(response.data))
     console.log("DAr",dataArray)
     setExpense(dataArray)
 
     // console.log(Object.keys(response.data))
 
-    // Object.keys(response.data).map((d)=>{
-    //   return console.log(d)
+    // Object.keys(response.data).map((e)=>{
+    //   console.log(e)
+      
+      
     // })
     
     // console.log(`Data: ${[data,...expense]} and expense: ${expense}`)
@@ -128,7 +136,7 @@ useEffect(()=>{
         <button type="submit">Submit</button>
       </form>
       
-      <ExpenseList items={expense} />
+      <ExpenseList items={expense} update={setExpense}/>
     </div>
   );
 };

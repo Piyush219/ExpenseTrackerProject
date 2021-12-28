@@ -8,6 +8,7 @@ import ProfilePage from "./Components/Pages/ProfilePage";
 import PasswordReset from "./Components/Pages/PasswordReset";
 import CreatingPassword from "./Components/Pages/CreatingPassword";
 import EnterResetCode from "./Components/Pages/EnterResetCode";
+import EditExpense from "./Components/Layout/Expenses/EditExpense";
 
 function App() {
 
@@ -57,7 +58,9 @@ function App() {
       <Route exact path = "/completeprofile" element={<ProfilePage inputName ={displayName} inputUrl = {photoUrl}/>}/>
       <Route exact path = "/resetpassword" element = {<PasswordReset/>}/>
       <Route exact path = "/enterresetcode" element = {<EnterResetCode/>}/>
-      <Route exact path = '/createpassword' element = {<CreatingPassword/>}/>    </Routes>
+      <Route exact path = '/createpassword' element = {<CreatingPassword/>}/>  
+      <Route exact path = '/editexpense/:id' element = {<EditExpense/>}/>
+        </Routes>
 
     </div>
   );
