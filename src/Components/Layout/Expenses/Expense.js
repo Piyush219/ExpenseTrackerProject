@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ExpenseList from "./ExpenseList";
 import { expenseActions } from "../../../store/expenseReducer";
+import Premium from "../../Pages/Premium";
 
 const Expenses = () => {
 
-  const [premium, setPremium] = useState(false)
+  const [premiumBtn, setPremiumBtn] = useState(false)
+  const [premiumfeatures, setPremiumfeatures] = useState(false)
   const TotalExpense = useSelector(state=>state.expense.totalexpense)  
   console.log("total",TotalExpense)  
 
@@ -130,12 +132,18 @@ useEffect(()=>{
   };
   useEffect(()=>{
     if(TotalExpense>=10000){
-      setPremium(true)
+      setPremiumBtn(true)
     }
     else{
-      setPremium(false)
+      setPremiumBtn(false)
     }
   },[TotalExpense])
+
+  const activatePremiumHandler = () =>{
+    setPremiumfeatures(true)
+  }
+
+
   return (
     <div>
       <h2>Enter Daily Expenses</h2>
@@ -162,7 +170,8 @@ useEffect(()=>{
         <button type="submit">Submit</button>
       </form>
       <h3>Total Expense : ${TotalExpense}</h3>
-      {premium && <button>Activate Premium</button>}
+      {premiumBtn && <button type="button" onClick={activatePremiumHandler}>Activate Premium</button>}
+      {premiumfeatures && <Premium/>}
 
       <ExpenseList />
     </div>
