@@ -9,17 +9,19 @@ import PasswordReset from "./Components/Pages/PasswordReset";
 import CreatingPassword from "./Components/Pages/CreatingPassword";
 import EnterResetCode from "./Components/Pages/EnterResetCode";
 import EditExpense from "./Components/Layout/Expenses/EditExpense";
+import { useDispatch } from "react-redux";
+import { authActions } from "./store/authReducer";
 
 function App() {
 
   const [displayName, setDisplayName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('')
-  const [islogin, setIslogin] = useState(false)
+  const dispatch = useDispatch();
 
 
   useEffect(()=>{
     if(localStorage.getItem("TokenIDExpense")){
-      setIslogin(true)
+      dispatch(authActions.login())
       fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA5nYjPCDidltvXYlAkGXzCUR0CIOQBAOo",{
       method: 'POST',
       body: JSON.stringify({
@@ -45,16 +47,16 @@ function App() {
     })
     }
     
-  },[])
+  },[dispatch])
 
   return (
     <div>
-      <Header login = {islogin} setLogin = {setIslogin} />
+      <Header  />
     
     <Routes>
       <Route exact path = "/" element = {<SignUp />}/>
       <Route exact path = "/welcome" element = {<WelcomePage/>}/>
-      <Route exact path = "/login" element={<Login setLogin = {setIslogin}/> }/>
+      <Route exact path = "/login" element={<Login /> }/>
       <Route exact path = "/completeprofile" element={<ProfilePage inputName ={displayName} inputUrl = {photoUrl}/>}/>
       <Route exact path = "/resetpassword" element = {<PasswordReset/>}/>
       <Route exact path = "/enterresetcode" element = {<EnterResetCode/>}/>

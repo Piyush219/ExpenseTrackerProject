@@ -1,10 +1,14 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ExpenseList from "./ExpenseList";
+import { expenseActions } from "../../../store/expenseReducer";
 
 const Expenses = () => {
 
-    
+  const [premium, setPremium] = useState(false)
+  const TotalExpense = useSelector(state=>state.expense.totalexpense)  
+  console.log("total",TotalExpense)  
 
   // const dummyExpense = [
   //   {
@@ -16,8 +20,8 @@ const Expenses = () => {
   //   },
   // ];
 
-  const [expense, setExpense] = useState([])
 
+  const dispatch = useDispatch();
   const inputExpenseMoneyRef = useRef();
   const inputExpenseDescriptionRef = useRef();
   const inputExpenseCategoryRef = useRef();
@@ -25,6 +29,10 @@ const Expenses = () => {
 
 useEffect(()=>{
   axios.get('https://expensetracker-c301c-default-rtdb.firebaseio.com/expenses.json').then(response => {
+
+  if(response.data!==null){
+    
+  
     console.log("res dat",response.data)
     
     const dataArray = [];
@@ -38,12 +46,16 @@ useEffect(()=>{
         category: response.data[key].category,
         
       })
-      
+      dispatch(expenseActions.totalExpense(response.data[key].money))
       
     }
     console.log("key", Object.keys(response.data))
     console.log("DAr",dataArray)
-    setExpense(dataArray)
+    // setExpense(dataArray)
+
+    
+    dispatch(expenseActions.expense(dataArray))
+    
 
     // console.log(Object.keys(response.data))
 
@@ -55,14 +67,19 @@ useEffect(()=>{
     
     // console.log(`Data: ${[data,...expense]} and expense: ${expense}`)
     // setExpense([arr, ...expense])
+  }
+  else{
+    console.log("nothing to sow")
+  }
   })
-},[]) 
+
+},[dispatch]) 
   
   
 
   const expenseSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(expense)
+    
     const enteredExpenseMoney = inputExpenseMoneyRef.current.value;
     const enteredExpenseDescription = inputExpenseDescriptionRef.current.value;
     const enteredExpenseCategory = inputExpenseCategoryRef.current.value;
@@ -96,7 +113,9 @@ useEffect(()=>{
           })
         }
       }).then(
-        setExpense([newExpense,...expense])
+        // setExpense([newExpense,...expense])
+        dispatch(expenseActions.addingExpense(newExpense)),
+        dispatch(expenseActions.totalExpense(newExpense.money))
       ).catch(err=>{
         alert(err.message)
       })
@@ -109,7 +128,14 @@ useEffect(()=>{
     inputExpenseCategoryRef.current.value = '';
     inputExpenseDescriptionRef.current.value = '';
   };
-
+  useEffect(()=>{
+    if(TotalExpense>=10000){
+      setPremium(true)
+    }
+    else{
+      setPremium(false)
+    }
+  },[TotalExpense])
   return (
     <div>
       <h2>Enter Daily Expenses</h2>
@@ -135,8 +161,10 @@ useEffect(()=>{
 
         <button type="submit">Submit</button>
       </form>
-      
-      <ExpenseList items={expense} update={setExpense}/>
+      <h3>Total Expense : ${TotalExpense}</h3>
+      {premium && <button>Activate Premium</button>}
+
+      <ExpenseList />
     </div>
   );
 };

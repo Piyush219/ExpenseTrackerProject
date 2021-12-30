@@ -19,7 +19,7 @@ const EditExpense = () => {
 
   const expenseEditHandler = (event) => {
     event.preventDefault();
-    const enteredEditMoney = inputEditCategoryRef.current.value;
+    const enteredEditMoney = inputEditMoneyRef.current.value;
     const enteredEditDescription = inputEditDescriptionRef.current.value;
     const enteredEditCategory = inputEditCategoryRef.current.value;
 
