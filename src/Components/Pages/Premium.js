@@ -12,8 +12,15 @@ const Premium = ()=> {
         
     }
 
+    const headers = [
+        {label: 'Category', key: 'category'},
+        {label: 'Description', key: 'description'},
+        {label: 'Money Spent', key: 'money'}
+    ]
+
     const csvReport = {
-        filename: 'Repost.csv',
+        filename: 'Report.csv',
+        headers: headers,
         data: csvData
     }
 

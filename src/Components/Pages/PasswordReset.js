@@ -41,7 +41,7 @@ const PasswordReset = ()=> {
         <div>
             <h2>Enter the Email with which you Registered</h2>
             <input type="email" placeholder="Email" ref={inputResetEmailRef}></input> 
-            <button type="submit" onClick={resetHandler}>Send Link</button>
+            <button type="submit" onClick={resetHandler}>Send Password Reset Link</button>
         </div>
     )
 }

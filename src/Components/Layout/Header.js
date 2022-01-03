@@ -1,10 +1,11 @@
 import React from "react";
+import styles from './Header.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/authReducer";
 
 
-const Header = (props) =>{
+const Header = () =>{
     
     const islogin = useSelector(state=> state.auth.isAuthenticated)
     const dispatch = useDispatch();
@@ -17,11 +18,12 @@ const Header = (props) =>{
     }
 
     return(
-        <div>
-            <nav>
-                <Link to = "/">Home</Link>
-                <Link to = "/login">Login</Link>
-                {islogin && <button onClick={logoutHandler} type="button">Logout</button>}
+        <div className={styles.headBody}> 
+        <span>Expense Tracker</span>
+            <nav className={styles.headNav}>
+                <Link className={styles.headHome} to = "/">Home</Link>
+                {!islogin && <Link className={styles.headLogin} to = "/login">Login</Link>}
+                {islogin && <button className={styles.logoutBtn} onClick={logoutHandler} type="button">Logout</button>}
             </nav>
         </div>
     )

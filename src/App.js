@@ -11,7 +11,7 @@ import EnterResetCode from "./Components/Pages/EnterResetCode";
 import EditExpense from "./Components/Layout/Expenses/EditExpense";
 import { useDispatch } from "react-redux";
 import { authActions } from "./store/authReducer";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import DarkThemeProvider from "./Components/Layout/DarkThemeProvider";
 import theme from "styled-theming";
 

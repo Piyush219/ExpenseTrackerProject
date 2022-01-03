@@ -48,13 +48,15 @@ const Login = (props)=>{
     return (
         <div className={styles.loginBody}>
             <form className={styles.loginForm} onSubmit={loginSubmitHandler}>
+            <h2 className={styles.loginTitle}>Login</h2>
             <label htmlFor="loginEmail">Email: </label>
-                <input id="loginEmail" type="email" required ref={inputLoginEmailRef}></input>
+                <input className = {styles.loginInput} id="loginEmail" type="email" required ref={inputLoginEmailRef}></input>
                 <label htmlFor="loginPass">Password: </label>
-                <input id="loginPass" type="password" required ref= {inputLoginPassRef}></input>
+                <input className = {styles.loginInput} id="loginPass" type="password" required ref= {inputLoginPassRef}></input>
                 <button className={styles.loginBtn} type="submit">Login</button>
+                <Link className={styles.loginForgot} to = "/resetpassword">Forget Password?</Link>
             </form>
-            <Link to = "/resetpassword">Forget Password?</Link>
+            
         </div>
     )
 }

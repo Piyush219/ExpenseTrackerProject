@@ -78,14 +78,15 @@ const SignUp = ()=>{
 
     return (
         <div className={styles.signupBody}>
-            <h2>SignUp</h2>
+            
             <form onSubmit={submitHandler} className={styles.signupForm}>
+            <h2 className={styles.signupTitle}>SignUp</h2>
                 <label htmlFor="signupEmail">Email: </label>
-                <input id="signupEmail" type="email" required ref={inputEmailRef}></input>
+                <input className = {styles.signupInput} id="signupEmail" type="email" required ref={inputEmailRef}></input>
                 <label htmlFor="signupPass">Password: </label>
-                <input id="signupPass" type="password" required ref= {inputPassRef}></input>
+                <input className = {styles.signupInput} id="signupPass" type="password" required ref= {inputPassRef}></input>
                 <label htmlFor="signupConfirmPass">Confirm Password: </label>
-                <input id="signupConfirmPass" type="password" required ref = {inputConfirmPassRef}></input>
+                <input className = {styles.signupInput} id="signupConfirmPass" type="password" required ref = {inputConfirmPassRef}></input>
                 <button type="submit" className={styles.signupBtn}>SignUp</button>
             </form>
             <div className={styles.verifyOtp}>

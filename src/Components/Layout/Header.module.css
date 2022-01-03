@@ -1,0 +1,50 @@
+.headBody {
+  background-color: rgb(16, 117, 70);
+  position: fixed;
+  height: 50px;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.headBody span{
+    margin-top: 20px;
+    color: white;
+    float: left;
+    margin-left: 5%;
+    
+}
+.headNav {
+  padding: 20px;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+  height: 50px;
+  display: block;
+  
+  position: fixed;
+  top: 0;
+}
+
+.headHome {
+  color: white;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.headLogin {
+  color: white;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.logoutBtn{
+  margin-left: 20px;
+  cursor: pointer;
+  background-color: rgb(16, 117, 70);
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 2px solid white;
+  
+  
+}
